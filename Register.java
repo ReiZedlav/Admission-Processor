@@ -1,5 +1,12 @@
 import javax.swing.*;
 
+//TO DO LIST:
+
+//GUI FOR BASIC DATA - DONE
+//MINI ENTRANCE EXAM - DONE
+//COURSE PICKING - NOT DONE
+//SLMIS LOGIN PAGE - NOT DONE
+
 class test {
     public static void main(String[] args) {
 
