@@ -6,6 +6,7 @@ import javax.swing.*;
 //MINI ENTRANCE EXAM - DONE
 //COURSE PICKING - NOT DONE
 //SLMIS LOGIN PAGE - NOT DONE
+//STUDENT INFORMATION - NOT DONE
 
 class test {
     public static void main(String[] args) {
