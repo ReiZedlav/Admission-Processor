@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
-class Test {
+class Register{
     private static int score = 0;
     private static String selectedCourse = ""; // Variable to hold the selected course
 
@@ -115,12 +115,20 @@ class Test {
             JOptionPane.showMessageDialog(registerPage, "Prepare for the entrance exam!", "Always aim for Magis", JOptionPane.INFORMATION_MESSAGE);
 
             // Take entrance exam
-            score = entranceExam();
 
-            // Display course selection based on score
-            selectedCourse = displayCourseSelection(applicantName);
+            int attempts = 0;
 
-            //registerPage.dispose(); - DO NOT FORGET 
+            while (selectedCourse.equals("")){
+                if (attempts > 0){
+                    JOptionPane.showMessageDialog(null,"You have " + attempts + " attempts!", "Try again!", JOptionPane.INFORMATION_MESSAGE);
+                } 
+
+                score = entranceExam();
+
+                selectedCourse = displayCourseSelection(applicantName);
+
+                attempts++;
+            }
         });
     } 
 
@@ -233,5 +241,3 @@ class Test {
         return selectedCourse;
     }
 }
-
-     
