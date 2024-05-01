@@ -209,7 +209,8 @@ class Test {
             message.append("Chemistry\n");
             message.append("Biology\n");
         } else {
-            return "Sorry, you have failed to qualify for any courses.";
+            JOptionPane.showMessageDialog(null, "You did not qualify!", "Admissions notice", JOptionPane.WARNING_MESSAGE);
+            return "";
         }
 
         // Display message
@@ -232,4 +233,5 @@ class Test {
         return selectedCourse;
     }
 }
+
      
