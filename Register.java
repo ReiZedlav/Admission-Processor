@@ -1,9 +1,65 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.Random;
 
-public class test{
+public class Register{
     public static int score = 0;
-    public static String selectedCourse = ""; // Variable to hold the selected course
+    public static String selectedCourse = ""; // Current Selected Course
+
+    //FINAL VALUES 
+
+    String evaluated_name;
+    String evaluated_gender;
+    String evaluated_birthday;
+    String evaluated_address;
+    String evaluated_email;
+    String evaluated_phone;
+    String evaluated_course;
+
+    String password;
+
+    public Register(String n, String g, String bday, String addr, String mail, String num, String course, String pwd){
+        this.evaluated_name = n;
+        this.evaluated_gender = g;
+        this.evaluated_birthday = bday;
+        this.evaluated_address = addr;
+        this.evaluated_email = mail;
+        this.evaluated_phone = num;
+        this.evaluated_course = course;
+        this.password = pwd;
+    }
+
+    public String getName(){
+        return evaluated_name;
+    }
+
+    public String getGender(){
+        return evaluated_gender;
+    }
+
+    public String getBirthday(){
+        return evaluated_birthday;
+    }
+
+    public String getAddress(){
+        return evaluated_address;
+    }
+
+    public String getEmail(){
+        return evaluated_email;
+    }
+
+    public String getPhone(){
+        return evaluated_phone;
+    }
+
+    public String getCourse(){
+        return evaluated_course;
+    }
+
+    public String getPassword(){
+        return password;
+    }
 
     public static void main(String[] args) {
         // Labels
@@ -131,15 +187,7 @@ public class test{
                 attempts++;
             }
 
-            //FINAL EVALUATED PERSONAL DATA - GRADE HAS BEEN REMOVED
-
-            String evaluated_name = applicantName;
-            String evaluated_gender = gender;
-            String evaluated_birthday = birthday;
-            String evaluated_address = address;
-            String evaluated_email = email;
-            String evaluated_phone = phone;
-            String evaluated_course = selectedCourse;
+            Register Grouped = new Register(applicantName,gender,birthday,address,email,phone,final_course,generatePassword()); //GET THESE VALUES
 
             applicantField.setText("");
             genderField.setText(""); 
@@ -149,9 +197,31 @@ public class test{
             phoneField.setText("");
             finalGradeField.setText("");
             selectedCourse = "";
-        });
-    }
+            });
     
+        }
+
+    public static String generatePassword() {
+        StringBuilder sb = new StringBuilder();
+    
+        Random random = new Random();
+        
+        for (int i = 0; i < 5; i++) {
+            char c = (char) (random.nextInt(126 - 32) + 32); 
+            sb.append(c);
+        }
+    
+        int randomNumber = random.nextInt(10); 
+        char randomSmallLetter = (char) (random.nextInt(26) + 'a'); 
+        char randomBigLetter = (char) (random.nextInt(26) + 'A'); 
+    
+        sb.append(randomNumber);
+        sb.append(randomSmallLetter);
+        sb.append(randomBigLetter);
+    
+        return sb.toString();
+        }
+
     private static int entranceExam() {
         int pts = 0;
 
@@ -261,5 +331,6 @@ public class test{
         return selectedCourse;
     }
 }
+
 
 
