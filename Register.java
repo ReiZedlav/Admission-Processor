@@ -8,6 +8,7 @@ class Test {
     public static void main(String[] args) {
         // Labels
         JLabel applicantLabel = new JLabel("Enter your name: ");
+        JLabel genderLabel = new JLabel("Enter your gender: "); 
         JLabel birthdayLabel = new JLabel("Enter your birthday: ");
         JLabel addressLabel = new JLabel("Enter your address: ");
         JLabel emailLabel = new JLabel("Enter your email: ");
@@ -16,6 +17,7 @@ class Test {
 
         // Text Fields (Input Forms)
         JTextField applicantField = new JTextField();
+        JTextField genderField = new JTextField(); 
         JTextField birthdayField = new JTextField();
         JTextField addressField = new JTextField();
         JTextField emailField = new JTextField();
@@ -25,34 +27,38 @@ class Test {
         // Submit Button
         JButton submitButton = new JButton("Submit");
 
-        // Create a JFrame (window) to hold components
+        // RegisterPage Container
         JFrame registerPage = new JFrame();
         registerPage.setTitle("Initial Registration");
-        registerPage.setSize(600, 600); // Increased height for proportional arrangement
-        registerPage.setLayout(null); // Disable layout manager for absolute positioning
+        registerPage.setSize(600, 600); // Ang size sa container. 
+        registerPage.setLayout(null); // null lng ni sya always
         registerPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        registerPage.setResizable(false); // Set resizable to false
+        registerPage.setResizable(false); // False para chada tan awon
 
-        // Set positions and sizes of labels and text fields
+        // Modify positions here
         applicantLabel.setBounds(50, 50, 200, 30);
-        applicantField.setBounds(250, 50, 300, 30); // Increased width for better visibility
-        birthdayLabel.setBounds(50, 100, 200, 30);
-        birthdayField.setBounds(250, 100, 300, 30);
-        addressLabel.setBounds(50, 150, 200, 30);
-        addressField.setBounds(250, 150, 300, 30);
-        emailLabel.setBounds(50, 200, 200, 30);
-        emailField.setBounds(250, 200, 300, 30);
-        phoneLabel.setBounds(50, 250, 200, 30);
-        phoneField.setBounds(250, 250, 300, 30);
-        finalGradeLabel.setBounds(50, 300, 200, 30);
-        finalGradeField.setBounds(250, 300, 300, 30);
+        applicantField.setBounds(250, 50, 300, 30); 
+        genderLabel.setBounds(50, 100, 200, 30); 
+        genderField.setBounds(250, 100, 300, 30); 
+        birthdayLabel.setBounds(50, 150, 200, 30);
+        birthdayField.setBounds(250, 150, 300, 30);
+        addressLabel.setBounds(50, 200, 200, 30);
+        addressField.setBounds(250, 200, 300, 30);
+        emailLabel.setBounds(50, 250, 200, 30);
+        emailField.setBounds(250, 250, 300, 30);
+        phoneLabel.setBounds(50, 300, 200, 30);
+        phoneField.setBounds(250, 300, 300, 30);
+        finalGradeLabel.setBounds(50, 350, 200, 30);
+        finalGradeField.setBounds(250, 350, 300, 30);
 
-        // Set position and size of submit button
-        submitButton.setBounds(250, 350, 100, 30); // Centered horizontally
+        // Button coordinates
+        submitButton.setBounds(250, 400, 100, 30); 
 
-        // Add components to the frame
+        // RegisterPage components
         registerPage.add(applicantLabel);
         registerPage.add(applicantField);
+        registerPage.add(genderLabel); 
+        registerPage.add(genderField); 
         registerPage.add(birthdayLabel);
         registerPage.add(birthdayField);
         registerPage.add(addressLabel);
@@ -68,9 +74,10 @@ class Test {
         // Make the frame visible
         registerPage.setVisible(true);
 
-        // ActionListener for the submit button to capture input values
+        // USED TO TRANSFER DATA TO DATA STRUCTURES
         submitButton.addActionListener(e -> {
             String applicantName = applicantField.getText();
+            String gender = genderField.getText(); 
             String birthday = birthdayField.getText();
             String address = addressField.getText();
             String email = emailField.getText();
@@ -78,7 +85,7 @@ class Test {
             String finalGrade = finalGradeField.getText();
 
             // Check for null or empty values
-            if (applicantName.isEmpty() || birthday.isEmpty() || address.isEmpty() || email.isEmpty() || phone.isEmpty() || finalGrade.isEmpty()) {
+            if (applicantName.isEmpty() || gender.isEmpty() || birthday.isEmpty() || address.isEmpty() || email.isEmpty() || phone.isEmpty() || finalGrade.isEmpty()) {
                 JOptionPane.showMessageDialog(registerPage, "Please fill out all fields.", "Incomplete Information", JOptionPane.ERROR_MESSAGE);
                 return;
             }
@@ -89,6 +96,7 @@ class Test {
                 if (grade < 75 || grade > 100) {
                     // Clear fields
                     applicantField.setText("");
+                    genderField.setText(""); // Clear gender field
                     birthdayField.setText("");
                     addressField.setText("");
                     emailField.setText("");
@@ -224,3 +232,4 @@ class Test {
         return selectedCourse;
     }
 }
+     
