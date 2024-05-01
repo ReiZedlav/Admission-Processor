@@ -1,9 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
 
-class Register{
-    private static int score = 0;
-    private static String selectedCourse = ""; // Variable to hold the selected course
+public class test{
+    public static int score = 0;
+    public static String selectedCourse = ""; // Variable to hold the selected course
 
     public static void main(String[] args) {
         // Labels
@@ -83,6 +83,7 @@ class Register{
             String email = emailField.getText();
             String phone = phoneField.getText();
             String finalGrade = finalGradeField.getText();
+            String final_course = selectedCourse;
 
             // Check for null or empty values
             if (applicantName.isEmpty() || gender.isEmpty() || birthday.isEmpty() || address.isEmpty() || email.isEmpty() || phone.isEmpty() || finalGrade.isEmpty()) {
@@ -129,9 +130,28 @@ class Register{
 
                 attempts++;
             }
-        });
-    } 
 
+            //FINAL EVALUATED PERSONAL DATA - GRADE HAS BEEN REMOVED
+
+            String evaluated_name = applicantName;
+            String evaluated_gender = gender;
+            String evaluated_birthday = birthday;
+            String evaluated_address = address;
+            String evaluated_email = email;
+            String evaluated_phone = phone;
+            String evaluated_course = selectedCourse;
+
+            applicantField.setText("");
+            genderField.setText(""); 
+            birthdayField.setText("");
+            addressField.setText("");
+            emailField.setText("");
+            phoneField.setText("");
+            finalGradeField.setText("");
+            selectedCourse = "";
+        });
+    }
+    
     private static int entranceExam() {
         int pts = 0;
 
@@ -241,3 +261,5 @@ class Register{
         return selectedCourse;
     }
 }
+
+
