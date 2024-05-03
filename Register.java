@@ -2,6 +2,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
 
+//MEMBERS
+
+//BJOURNE CAHOY
+//NIALL CRUZ
+//MINE GALVE
+//JUDE MACALAGUING
+//ANDREI VALDEZ
+
 public class Register{
     public static int score = 0;
     public static String selectedCourse = ""; // Current Selected Course
@@ -187,7 +195,11 @@ public class Register{
                 attempts++;
             }
 
-            Register Grouped = new Register(applicantName,gender,birthday,address,email,phone,final_course,generatePassword()); //GET THESE VALUES
+            Register Student = new Register(applicantName,gender,birthday,address,email,phone,final_course,generatePassword()); //GET THESE VALUES
+
+            String message = "Congratulations applicant, you have accomplished the admission process! You may now login to your account! \n\n" + "Email: " + Student.getEmail() + "\n" + "Password: " + Student.getPassword();
+
+            JOptionPane.showMessageDialog(registerPage, message,"Student Credentials",JOptionPane.INFORMATION_MESSAGE);
 
             applicantField.setText("");
             genderField.setText(""); 
@@ -198,7 +210,11 @@ public class Register{
             finalGradeField.setText("");
             selectedCourse = "";
             });
-    
+
+            //TO DO LIST, STORE USER DATA,
+            //LOGIN PAGE
+            //VIEW INFORMATION
+
         }
 
     public static String generatePassword() {
