@@ -1,4 +1,4 @@
-How to access the input data:
+How to access the input data from register.java:
 
 Student.getName() - Gets student name
 Student.getGender() - Gets student gender
@@ -10,4 +10,17 @@ Student.getCourse() - Gets student course
 Student.getPassword() - Gets student password
 
 Everytime a new form is entered, the data is overwritten.
+
+
+
+TO DO LIST:
+
+*DESIGN
+*STORE USER DATA
+*CREATE LOGIN PAGE
+*CREATE MINI SLMIS
+
+*(?) CREATE ADMISSION ALGORITHM (?) idk
+
+
 
