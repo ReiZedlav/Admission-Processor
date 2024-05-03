@@ -1,1 +1,13 @@
+How to access the input data:
+
+Student.getName() - Gets student name
+Student.getGender() - Gets student gender
+Student.getBirthday() - Gets student birthday
+Student.getAddress() - Gets student address
+Student.getEmail() - Gets student email
+Student.getPhone() - Gets student phone
+Student.getCourse() - Gets student course
+Student.getPassword() - Gets student password
+
+Everytime a new form is entered, the data is overwritten.
 
