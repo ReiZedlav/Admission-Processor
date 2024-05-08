@@ -2,13 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 import java.io.*;
-import java.awt.Color;
-
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-
 
 public class Register extends LoginPage{
     public static int score = 0;
@@ -389,7 +382,7 @@ public class Register extends LoginPage{
     }
 }
 
-class LoginPage{ //CTRL + F with CANARY778743434 to find the line of code.
+class LoginPage extends SLMIS{ //CTRL + F with CANARY778743434 to find the line of code.
     static Boolean Authenticated = false;
     
     public static void setAuth(){
@@ -423,7 +416,7 @@ class LoginPage{ //CTRL + F with CANARY778743434 to find the line of code.
         }
     }
 
-    public static void createDatabase(){ //IRRELEVANT (USELESS | WILL NOT DELETE TO BE SURE)
+    public static void createDatabase(){ //USELESS METHOD FOR NOW. WILL NOT DELETE IN CASE SOMETHING GOES WRONG. Remove if its ok to remove. 
         String filename = "database.csv";
 
         try (FileWriter writer = new FileWriter(filename)){
@@ -476,7 +469,7 @@ class LoginPage{ //CTRL + F with CANARY778743434 to find the line of code.
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.insets = new Insets(5, 5, 5, 5);
-	panel.setBackground(new Color(25, 39, 52));
+	    panel.setBackground(new Color(25, 39, 52));
 
         JLabel emailLbl = new JLabel("Email:");
         JTextField emailField = new JTextField(20);
@@ -485,7 +478,7 @@ class LoginPage{ //CTRL + F with CANARY778743434 to find the line of code.
         JButton submitButton = new JButton("Submit");
 
 	    //text color
-	   	 emailLbl.setForeground(Color.WHITE);
+	   	emailLbl.setForeground(Color.WHITE);
 		passwordLbl.setForeground(Color.WHITE);
 
 
@@ -521,13 +514,16 @@ class LoginPage{ //CTRL + F with CANARY778743434 to find the line of code.
         
             if (email.equals("admin") && password.equals("admin")){
 
-                System.out.println(); // ADMIN PAGE HERE & DATASTRUCTURES - INCOMPLETE32423548354
+                SLMIS.adminPage(); // ADMIN PAGE HERE & DATASTRUCTURES - INCOMPLETE32423548354
 
             } else{ //STUDENT PANEL
 
                 String[] Cookie = CSVAuth(email,password);
 
                 if (getAuth()){ //INCOMPLETE - NO GUI - INCOMPLETE7343847384
+
+                    //SLMIS.studentPage(Cookie);
+
                     System.out.println("Values");
                     System.out.println(Cookie[0]);
                     System.out.println(Cookie[1]);
@@ -541,4 +537,20 @@ class LoginPage{ //CTRL + F with CANARY778743434 to find the line of code.
             loginFrame.dispose(); // Close the login frame after successful login
         });
     }
+}
+
+class SLMIS{
+
+    public static void adminPage(){
+        System.out.println();
+    }
+
+    public static void studentPage(String[] Personal_Info){
+        //Local Variables
+
+
+
+        System.out.println();
+    }
+
 }
