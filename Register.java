@@ -2,6 +2,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 import java.io.*;
+import java.awt.Color;
+
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
 
 public class Register extends LoginPage{
     public static int score = 0;
@@ -93,10 +100,16 @@ public class Register extends LoginPage{
         JFrame registerPage = new JFrame();
         registerPage.setTitle("Initial Registration");
         registerPage.setSize(600, 600); // Ang size sa container. 
+
+      	registerPage.getContentPane().setBackground(new Color(25, 39, 52));
+	
         registerPage.setLayout(null); // null lng ni sya always
         registerPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         registerPage.setResizable(false); // False para chada tan awon
+	//ImageIcon image = new ImageIcon("HU2.jpg");
+       // registerPage.setIconImage(image.getImage());
 
+	
         // Modify positions here
         applicantLabel.setBounds(50, 50, 200, 30);
         applicantField.setBounds(250, 50, 300, 30); 
@@ -136,9 +149,19 @@ public class Register extends LoginPage{
         registerPage.add(submitButton);
         registerPage.add(loginButton);
 
+	//color per label
+	applicantLabel.setForeground(Color.WHITE);
+	genderLabel.setForeground(Color.WHITE);
+	birthdayLabel.setForeground(Color.WHITE);
+	addressLabel.setForeground(Color.WHITE);
+	emailLabel.setForeground(Color.WHITE);
+	phoneLabel.setForeground(Color.WHITE);
+	finalGradeLabel.setForeground(Color.WHITE);
+
+
         // Make the frame visible
         registerPage.setVisible(true);
-
+	
         //LOGIN EVENT HANDLER
 
         loginButton.addActionListener(e -> { //CANARY778743434
@@ -453,6 +476,7 @@ class LoginPage{ //CTRL + F with CANARY778743434 to find the line of code.
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.insets = new Insets(5, 5, 5, 5);
+
 
         JLabel emailLbl = new JLabel("Email:");
         JTextField emailField = new JTextField(20);
