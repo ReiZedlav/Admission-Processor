@@ -476,13 +476,18 @@ class LoginPage{ //CTRL + F with CANARY778743434 to find the line of code.
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.insets = new Insets(5, 5, 5, 5);
-
+	panel.setBackground(new Color(25, 39, 52));
 
         JLabel emailLbl = new JLabel("Email:");
         JTextField emailField = new JTextField(20);
         JLabel passwordLbl = new JLabel("Password:");
         JPasswordField passwordField = new JPasswordField(20);
         JButton submitButton = new JButton("Submit");
+
+	    //text color
+	   	 emailLbl.setForeground(Color.WHITE);
+		passwordLbl.setForeground(Color.WHITE);
+
 
         constraints.gridx = 0;
         constraints.gridy = 0;
