@@ -383,20 +383,7 @@ public class Register extends LoginPage{
 }
 
 class LoginPage extends SLMIS{ //CTRL + F with CANARY778743434 to find the line of code.
-    static Boolean Authenticated = false;
     
-    public static void setAuth(){
-        Authenticated = true;
-    }
-
-    public static void unsetAuth(){
-        Authenticated = false;
-    }
-
-    public static Boolean getAuth(){
-        return Authenticated;
-    }
-
     //DATABASE LOGIC
 
     public static void appendDatabase(String[] values){
@@ -451,7 +438,6 @@ class LoginPage extends SLMIS{ //CTRL + F with CANARY778743434 to find the line 
         
         if (found) {
             JOptionPane.showMessageDialog(null, "Login successful!");
-            setAuth();
         } else {
             JOptionPane.showMessageDialog(null, "Invalid email or password. Please try again.");
         }
@@ -507,31 +493,20 @@ class LoginPage extends SLMIS{ //CTRL + F with CANARY778743434 to find the line 
 
         submitButton.addActionListener(e -> {
 
-            unsetAuth(); //RESET AUTHENTICATION
-
             String email = emailField.getText();
             String password = new String(passwordField.getPassword());
         
             if (email.equals("admin") && password.equals("admin")){
 
-                SLMIS.adminPage(); // ADMIN PAGE HERE & DATASTRUCTURES - INCOMPLETE32423548354
+                SLMIS.adminPage(); 
 
             } else{ //STUDENT PANEL
 
                 String[] Cookie = CSVAuth(email,password);
 
-                if (getAuth()){ //INCOMPLETE - NO GUI - INCOMPLETE7343847384
-
-                    //SLMIS.studentPage(Cookie);
-
-                    System.out.println("Values");
-                    System.out.println(Cookie[0]);
-                    System.out.println(Cookie[1]);
-                    System.out.println(Cookie[2]);
-                    System.out.println(Cookie[3]);
-                    System.out.println(Cookie[4]);
-                    System.out.println(Cookie[5]);             
-                }
+            
+                SLMIS.studentPage(Cookie);            
+                
             }
 
             loginFrame.dispose(); // Close the login frame after successful login
@@ -541,16 +516,61 @@ class LoginPage extends SLMIS{ //CTRL + F with CANARY778743434 to find the line 
 
 class SLMIS{
 
-    public static void adminPage(){
+    public static void adminPage(){ // ADMIN PAGE HERE & DATASTRUCTURES - INCOMPLETE32423548354
         System.out.println();
     }
 
-    public static void studentPage(String[] Personal_Info){
-        //Local Variables
+    public static void studentPage(String[] Personal_Info) {
+        // Extracting personal information
+        String email = Personal_Info[0];
+        String name = Personal_Info[2];
+        String gender = Personal_Info[3];
+        String birthday = Personal_Info[4];
+        String address = Personal_Info[5];
+        String phone = Personal_Info[6];
 
+        // Creating GUI components
+        JFrame frame = new JFrame("Student Page");
+        JPanel panel = new JPanel();
+        JLabel headerLabel = new JLabel("Welcome, " + name + "!");
+        JTextArea infoTextArea = new JTextArea();
+        JButton logoutButton = new JButton("Logout");
 
+        // Setting layout and size
+        panel.setLayout(null);
+        frame.setSize(600, 600);
+        frame.setResizable(false);
 
-        System.out.println();
+        // Setting bounds for components
+        headerLabel.setBounds(10, 10, 300, 30);
+        infoTextArea.setBounds(10, 50, 280, 400);
+        logoutButton.setBounds(10, 480, 100, 30);
+
+        // Displaying summary of user information
+        infoTextArea.setText("Email: " + email + "\n"
+                + "Gender: " + gender + "\n"
+                + "Birthday: " + birthday + "\n"
+                + "Address: " + address + "\n"
+                + "Phone: " + phone);
+
+        // Adding components to panel
+        panel.add(headerLabel);
+        panel.add(infoTextArea);
+        panel.add(logoutButton);
+
+        // Adding panel to frame
+        frame.add(panel);
+
+        // Setting default close operation
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // Setting frame visibility
+        frame.setVisible(true);
+
+        // Logout button action
+        logoutButton.addActionListener(e -> {
+            frame.dispose(); // Close the GUI
+        });
     }
 
 }
