@@ -170,7 +170,6 @@ public class Register extends LoginPage{
             String email = emailField.getText();
             String phone = phoneField.getText();
             String finalGrade = finalGradeField.getText();
-            String final_course = selectedCourse;
 
             // Check for null or empty values
             if (applicantName.isEmpty() || gender.isEmpty() || birthday.isEmpty() || address.isEmpty() || email.isEmpty() || phone.isEmpty() || finalGrade.isEmpty()) {
@@ -218,7 +217,9 @@ public class Register extends LoginPage{
                 attempts++;
             }
 
-            Register Student = new Register(applicantName,gender,birthday,address,email,phone,final_course,generatePassword()); //GET THESE VALUES
+            //TEST
+
+            Register Student = new Register(applicantName,gender,birthday,address,email,phone,selectedCourse,generatePassword()); //GET THESE VALUES
 
             String message = "Congratulations applicant, you have accomplished the admission process! You may now login to your account! \n\n" + "Email: " + Student.getEmail() + "\n" + "Password: " + Student.getPassword();
 
@@ -241,7 +242,7 @@ public class Register extends LoginPage{
                 Student.getBirthday(),
                 Student.getAddress(),
                 Student.getPhone(),
-                Student.getCourse()
+                Student.getCourse(),
             };
 
             //AUTOMATICALLY ADD STUDENT DATA TO CSV FILE
@@ -356,6 +357,7 @@ public class Register extends LoginPage{
             message.append("Psychology\n");
             message.append("Chemistry\n");
             message.append("Biology\n");
+
         } else {
             JOptionPane.showMessageDialog(null, "You did not qualify!", "Admissions notice", JOptionPane.WARNING_MESSAGE);
             return "";
@@ -389,17 +391,18 @@ class LoginPage extends SLMIS{ //CTRL + F with CANARY778743434 to find the line 
     public static void appendDatabase(String[] values){
         String filename = "database.csv";
     
-        try (FileWriter writer = new FileWriter(filename, true)){
+        try (FileWriter writer = new FileWriter(filename, true)){ //CINNAMON
             for (int i = 0; i < values.length; i++){
                 writer.append(values[i]);
                 if (i < values.length - 1) { // Check if it's not the last value
                     writer.append(",");
+                } else { // If it's the last value, move to a new line
+                    writer.append("\n");
                 }
             }
-            writer.append("\n");
             writer.flush();
         } catch (IOException e){
-            System.err.println("Error 6969 : Failed to append to database!");
+            System.err.println("Error 6969: Failed to append to database!");
         }
     }
 
@@ -429,7 +432,7 @@ class LoginPage extends SLMIS{ //CTRL + F with CANARY778743434 to find the line 
                 if (values[0].equals(email) && values[1].equals(password)) {
                     userData = values;
                     found = true;
-                    break; // exit loop once credentials are found
+                    break; // Gawas ug loop pag human ug match sa database
                 }
             }
         } catch (IOException e) {
@@ -498,7 +501,7 @@ class LoginPage extends SLMIS{ //CTRL + F with CANARY778743434 to find the line 
         
             if (email.equals("admin") && password.equals("admin")){
 
-                SLMIS.adminPage(); 
+                //SLMIS.adminPage();  
 
             } else{ //STUDENT PANEL
 
@@ -514,51 +517,67 @@ class LoginPage extends SLMIS{ //CTRL + F with CANARY778743434 to find the line 
     }
 }
 
-class SLMIS{
+class SLMIS extends Subjects {
 
-    public static void adminPage(){ // ADMIN PAGE HERE & DATASTRUCTURES - INCOMPLETE32423548354
-        System.out.println();
-    }
+    //public static void adminPage(){ // ADMIN PAGE HERE & DATASTRUCTURES - INCOMPLETE32423548354
+    //System.out.println();
+    //}
 
     public static void studentPage(String[] Personal_Info) {
-        // Extracting personal information
+        // Local variables 
         String email = Personal_Info[0];
         String name = Personal_Info[2];
         String gender = Personal_Info[3];
         String birthday = Personal_Info[4];
         String address = Personal_Info[5];
         String phone = Personal_Info[6];
+        String course = Personal_Info[7];
 
-        // Creating GUI components
+        // Components
         JFrame frame = new JFrame("Student Page");
         JPanel panel = new JPanel();
         JLabel headerLabel = new JLabel("Welcome, " + name + "!");
+        JLabel departmentLabel = new JLabel("Department of " + course);
         JTextArea infoTextArea = new JTextArea();
+        JTextArea subjectsTextArea = new JTextArea(); // Added for subjects
         JButton logoutButton = new JButton("Logout");
 
-        // Setting layout and size
+        // Setting layout - custom 
         panel.setLayout(null);
         frame.setSize(600, 600);
         frame.setResizable(false);
 
-        // Setting bounds for components
+        // Set positions here
         headerLabel.setBounds(10, 10, 300, 30);
+        departmentLabel.setBounds(150, 10, 300, 30); 
+        departmentLabel.setHorizontalAlignment(SwingConstants.CENTER); 
+        departmentLabel.setFont(new Font("Arial", Font.BOLD, 16)); 
         infoTextArea.setBounds(10, 50, 280, 400);
+        subjectsTextArea.setBounds(310, 50, 280, 400); 
         logoutButton.setBounds(10, 480, 100, 30);
 
-        // Displaying summary of user information
+        // Display student info
         infoTextArea.setText("Email: " + email + "\n"
                 + "Gender: " + gender + "\n"
                 + "Birthday: " + birthday + "\n"
                 + "Address: " + address + "\n"
                 + "Phone: " + phone);
 
-        // Adding components to panel
+        // Display subjects based on course
+        StringBuilder subjects = new StringBuilder("Subjects:\n");
+        for (String subject : prospectus[getIndexForCourse(course)]) {
+            subjects.append(subject).append("\n");
+        }
+        subjectsTextArea.setText(subjects.toString());
+
+        // Add components to panel
         panel.add(headerLabel);
+        panel.add(departmentLabel);
         panel.add(infoTextArea);
+        panel.add(subjectsTextArea);
         panel.add(logoutButton);
 
-        // Adding panel to frame
+        // Add panel to frame
         frame.add(panel);
 
         // Setting default close operation
@@ -573,4 +592,51 @@ class SLMIS{
         });
     }
 
+}
+
+class Subjects {
+
+    static String[][] prospectus = {
+            // Engineering
+            {"Calculus I", "Physics I", "Statistics I", "Aerodynamics I", "Electrical Wiring", "Materials Science", "Thermodynamics I"},
+
+            // Nursing
+            {"Anatomy", "Physiology", "Pharmacology", "Microbiology", "Patient Care", "Nursing Ethics", "Clinical Practice"},
+
+            // Computer Science
+            {"Programming Fundamentals", "Data Structures", "Algorithms", "Database Management", "Operating Systems", "Computer Networks", "Artificial Intelligence"},
+
+            // Agriculture
+            {"Plant Science", "Soil Science", "Crop Management", "Livestock Management", "Agricultural Economics", "Sustainable Agriculture", "Food Science"},
+
+            // Psychology
+            {"Introduction to Psychology", "Abnormal Psychology", "Developmental Psychology", "Cognitive Psychology", "Social Psychology", "Psychological Research Methods", "Clinical Psychology"},
+
+            // Chemistry
+            {"General Chemistry", "Organic Chemistry", "Physical Chemistry", "Analytical Chemistry", "Inorganic Chemistry", "Biochemistry", "Environmental Chemistry"},
+
+            // Biology
+            {"Cell Biology", "Genetics", "Ecology", "Evolutionary Biology", "Microbiology", "Human Physiology", "Neuroscience"}
+    };
+
+    static int getIndexForCourse(String course) {
+        switch (course.toLowerCase()) {
+            case "engineering":
+                return 0;
+            case "nursing":
+                return 1;
+            case "computer science":
+                return 2;
+            case "agriculture":
+                return 3;
+            case "psychology":
+                return 4;
+            case "chemistry":
+                return 5;
+            case "biology":
+                return 6;
+            default:
+                return -1;
+        }
+    }
 }
