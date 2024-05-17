@@ -161,7 +161,7 @@ public class Register extends LoginPage{
             LoginPage.createLoginPage();      
     });
 
-        // USED TO TRANSFER DATA TO DATA STRUCTURES
+        // USED TO TRANSFER DATA TO DATABASE
         submitButton.addActionListener(e -> {
             String applicantName = applicantField.getText();
             String gender = genderField.getText(); 
@@ -203,20 +203,14 @@ public class Register extends LoginPage{
 
             // Take entrance exam
 
-            int attempts = 0;
-
             while (selectedCourse.equals("")){
-                if (attempts > 0){
-                    JOptionPane.showMessageDialog(null,"You have " + attempts + " attempts!", "Try again!", JOptionPane.INFORMATION_MESSAGE);
-                } 
 
                 score = entranceExam();
 
                 selectedCourse = displayCourseSelection(applicantName);
-
-                attempts++;
+            
             }
-
+            
             //TEST
 
             Register Student = new Register(applicantName,gender,birthday,address,email,phone,selectedCourse,generatePassword()); //GET THESE VALUES
@@ -277,43 +271,43 @@ public class Register extends LoginPage{
         int pts = 0;
 
         // Question 1
-        String answer1 = JOptionPane.showInputDialog(null, "IDE is the best subject ever - True or False?");
+        String answer1 = JOptionPane.showInputDialog(null, "The capital of france is paris - True or False?");
         if (answer1 != null && answer1.equalsIgnoreCase("True")) {
             pts++;
         }
 
         // Question 2
-        String answer2 = JOptionPane.showInputDialog(null, "Xavier University is a Jesuit school - True or False?");
+        String answer2 = JOptionPane.showInputDialog(null, "Water boils at 100 degrees celcius - True or False?");
         if (answer2 != null && answer2.equalsIgnoreCase("True")) {
             pts++;
         }
 
         // Question 3
-        String answer3 = JOptionPane.showInputDialog(null, "5 + 5 is 11 - True or False?");
+        String answer3 = JOptionPane.showInputDialog(null, "The earth is flat - True or False?");
         if (answer3 != null && answer3.equalsIgnoreCase("False")) {
             pts++;
         }
 
         // Question 4
-        String answer4 = JOptionPane.showInputDialog(null, "15 + 11 = 26 - True or False?");
+        String answer4 = JOptionPane.showInputDialog(null, "The mitochondria is the powerhouse of the cell - True or False?");
         if (answer4 != null && answer4.equalsIgnoreCase("True")) {
             pts++;
         }
 
         // Question 5
-        String answer5 = JOptionPane.showInputDialog(null, "Pamate & Lage translates to 'listen carefully' - True or False?");
+        String answer5 = JOptionPane.showInputDialog(null, "The primary colors are: red, blue, yellow - True or False?");
         if (answer5 != null && answer5.equalsIgnoreCase("True")) {
             pts++;
         }
 
         // Question 6
-        String answer6 = JOptionPane.showInputDialog(null, "D comes before C then B must come before C - True or False?");
+        String answer6 = JOptionPane.showInputDialog(null, "The great wall of china is located in Japan - True or False?");
         if (answer6 != null && answer6.equalsIgnoreCase("True")) {
             pts++;
         }
 
         // Question 7
-        String answer7 = JOptionPane.showInputDialog(null, "iOS is better than Android - True or False?");
+        String answer7 = JOptionPane.showInputDialog(null, "Neil Armstrong was the first person to ever walk on the moon - True or False?");
         if (answer7 != null && answer7.equalsIgnoreCase("False")) {
             pts++;
         }
@@ -325,13 +319,13 @@ public class Register extends LoginPage{
         }
 
         // Question 9
-        String answer9 = JOptionPane.showInputDialog(null, "Electric Vehicles are superior to Combustion engines - True or False?");
+        String answer9 = JOptionPane.showInputDialog(null, "The chemical symbol for water is H30 - True or False?");
         if (answer9 != null && answer9.equalsIgnoreCase("False")) {
             pts++;
         }
 
         // Question 10
-        String answer10 = JOptionPane.showInputDialog(null, "Balik Balik Sturya means repeating words. - True or False?");
+        String answer10 = JOptionPane.showInputDialog(null, "5 + 5 is 10 - True or False?");
         if (answer10 != null && answer10.equalsIgnoreCase("True")) {
             pts++;
         }
@@ -343,17 +337,17 @@ public class Register extends LoginPage{
         StringBuilder message = new StringBuilder("Dear " + name + ", based on your entrance exam score, you are eligible for the following courses:\n\n");
 
         if (score > 5) {
-            message.append("Engineering\n");
+            message.append("Industrial Engineering\n");
             message.append("Nursing\n");
             message.append("Computer Science\n");
-            message.append("Agriculture\n");
+            message.append("Agricultural Sciences\n");
             message.append("Psychology\n");
             message.append("Chemistry\n");
             message.append("Biology\n");
             
         } else if (score > 2) {
             message.append("Computer Science\n");
-            message.append("Agriculture\n");
+            message.append("Agricultural sciences\n");
             message.append("Psychology\n");
             message.append("Chemistry\n");
             message.append("Biology\n");
@@ -370,7 +364,7 @@ public class Register extends LoginPage{
         String[] courses;
 
         if (score > 5){
-            courses = new String[]{"Engineering", "Nursing", "Computer Science", "Agriculture","Psychology","Chemistry","Biology"};
+            courses = new String[]{"Industrial Engineering", "Nursing", "Computer Science", "Agricultural sciences","Psychology","Chemistry","Biology"};
         }
 
         else if (score > 2) {
@@ -391,7 +385,7 @@ class LoginPage extends SLMIS{ //CTRL + F with CANARY778743434 to find the line 
     public static void appendDatabase(String[] values){
         String filename = "database.csv";
     
-        try (FileWriter writer = new FileWriter(filename, true)){ //CINNAMON
+        try (FileWriter writer = new FileWriter(filename, true)){ 
             for (int i = 0; i < values.length; i++){
                 writer.append(values[i]);
                 if (i < values.length - 1) { // Check if it's not the last value
@@ -402,7 +396,7 @@ class LoginPage extends SLMIS{ //CTRL + F with CANARY778743434 to find the line 
             }
             writer.flush();
         } catch (IOException e){
-            System.err.println("Error 6969: Failed to append to database!");
+            System.err.println("Error Failed to append to database!");
         }
     }
 
@@ -413,7 +407,7 @@ class LoginPage extends SLMIS{ //CTRL + F with CANARY778743434 to find the line 
             writer.append("admin,admin\n");
             writer.flush();
         } catch(IOException e){
-            System.out.print("Error 69 : Database creation failed!");
+            System.out.print("Error: Database creation failed!");
         }
     }
 
@@ -532,102 +526,119 @@ class SLMIS extends Subjects {
         String address = Personal_Info[5];
         String phone = Personal_Info[6];
         String course = Personal_Info[7];
-
+    
         // Components
         JFrame frame = new JFrame("Student Page");
         JPanel panel = new JPanel();
+        panel.setBackground(new Color(25, 39, 52)); 
         JLabel headerLabel = new JLabel("Welcome, " + name + "!");
         JLabel departmentLabel = new JLabel("Department of " + course);
+        JPanel personalInfoPanel = new JPanel(); 
+        JPanel subjectsPanel = new JPanel(); 
         JTextArea infoTextArea = new JTextArea();
-        JTextArea subjectsTextArea = new JTextArea(); // Added for subjects
+        JTextArea subjectsTextArea = new JTextArea(); 
         JButton logoutButton = new JButton("Logout");
-
+    
         // Setting layout - custom 
         panel.setLayout(null);
         frame.setSize(600, 600);
         frame.setResizable(false);
-
-        // Set positions here
+    
+        //  positions 
         headerLabel.setBounds(10, 10, 300, 30);
         departmentLabel.setBounds(150, 10, 300, 30); 
         departmentLabel.setHorizontalAlignment(SwingConstants.CENTER); 
         departmentLabel.setFont(new Font("Arial", Font.BOLD, 16)); 
-        infoTextArea.setBounds(10, 50, 280, 400);
-        subjectsTextArea.setBounds(310, 50, 280, 400); 
+        departmentLabel.setForeground(Color.GREEN); 
+        personalInfoPanel.setBounds(10, 50, 280, 400); 
+        personalInfoPanel.setBorder(BorderFactory.createTitledBorder("Personal Information")); 
+        infoTextArea.setBounds(10, 20, 260, 360); 
+        subjectsPanel.setBounds(310, 50, 280, 400); 
+        subjectsPanel.setBorder(BorderFactory.createTitledBorder("Subjects")); 
+        subjectsTextArea.setBounds(10, 20, 260, 360); 
         logoutButton.setBounds(10, 480, 100, 30);
-
+    
         // Display student info
         infoTextArea.setText("Email: " + email + "\n"
                 + "Gender: " + gender + "\n"
                 + "Birthday: " + birthday + "\n"
                 + "Address: " + address + "\n"
                 + "Phone: " + phone);
-
-        // Display subjects based on course
-        StringBuilder subjects = new StringBuilder("Subjects:\n");
+    
+        // Display subjects 
+        StringBuilder subjects = new StringBuilder("");
         for (String subject : prospectus[getIndexForCourse(course)]) {
             subjects.append(subject).append("\n");
         }
         subjectsTextArea.setText(subjects.toString());
-
-        // Add components to panel
+    
+       
+        personalInfoPanel.add(infoTextArea);
+    
+        
+        subjectsPanel.add(subjectsTextArea);
+    
+      
         panel.add(headerLabel);
         panel.add(departmentLabel);
-        panel.add(infoTextArea);
-        panel.add(subjectsTextArea);
+        panel.add(personalInfoPanel);
+        panel.add(subjectsPanel);
         panel.add(logoutButton);
-
-        // Add panel to frame
+    
+       
         frame.add(panel);
-
-        // Setting default close operation
+    
+       
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+    
         // Setting frame visibility
         frame.setVisible(true);
-
-        // Logout button action
+    
+       
+        headerLabel.setForeground(Color.YELLOW);
+    
+        // Logout button event handler
         logoutButton.addActionListener(e -> {
-            frame.dispose(); // Close the GUI
+            frame.dispose(); 
         });
+    
     }
-
 }
 
 class Subjects {
 
     static String[][] prospectus = {
             // Engineering
-            {"Calculus I", "Physics I", "Statistics I", "Aerodynamics I", "Electrical Wiring", "Materials Science", "Thermodynamics I"},
+            {"Introduction to Industrial Engineering", "Calculus I", "Physics I", "IDE 10.1", "PE 1", "Chemistry for Engineers", "NSTP 1"},
 
             // Nursing
-            {"Anatomy", "Physiology", "Pharmacology", "Microbiology", "Patient Care", "Nursing Ethics", "Clinical Practice"},
+            {"Theoritical Foundations of Nursing", "Biology", "Math 4", "PE 1", "NSTP 1", "Oral Communication", "Theology 1"},
 
             // Computer Science
-            {"Programming Fundamentals", "Data Structures", "Algorithms", "Database Management", "Operating Systems", "Computer Networks", "Artificial Intelligence"},
+            {"Introduction to computing", "Introduction to programming", "Understanding the self", "Math 4", "Theology 1", "PE 1", "NSTP 1"},
 
             // Agriculture
-            {"Plant Science", "Soil Science", "Crop Management", "Livestock Management", "Agricultural Economics", "Sustainable Agriculture", "Food Science"},
+            {"Introduction to livestock management", "Introduction to crop science", "IDE 10.1", "Entrepreneurship", "NSTP 1", "PE 1", "Understanding the self"},
 
             // Psychology
-            {"Introduction to Psychology", "Abnormal Psychology", "Developmental Psychology", "Cognitive Psychology", "Social Psychology", "Psychological Research Methods", "Clinical Psychology"},
+            {"Introduction to couseling", "Biology", "Theology 1", "Math 4", "PE 1","NSTP 1", "Written communications"},
 
             // Chemistry
-            {"General Chemistry", "Organic Chemistry", "Physical Chemistry", "Analytical Chemistry", "Inorganic Chemistry", "Biochemistry", "Environmental Chemistry"},
+            {"Introduction to organic Chemistry", "Organic Chemistry", "Math 4", "IDE 10.1", "Oral Communications", "NSTP 1", "PE 1"},
 
             // Biology
-            {"Cell Biology", "Genetics", "Ecology", "Evolutionary Biology", "Microbiology", "Human Physiology", "Neuroscience"}
+            {"Introduction to biology", "Microbiology", "Basic calculus", "Theology 1", "Written Communications", "NSTP 1", "PE 1"}
     };
 
     static int getIndexForCourse(String course) {
         switch (course.toLowerCase()) {
-            case "engineering":
+            case "industrial engineering":
                 return 0;
             case "nursing":
                 return 1;
             case "computer science":
                 return 2;
-            case "agriculture":
+            case "agricultural sciences":
                 return 3;
             case "psychology":
                 return 4;
