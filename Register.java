@@ -624,7 +624,7 @@ class Subjects {
             {"Introduction to couseling", "Biology", "Theology 1", "Math 4", "PE 1","NSTP 1", "Written communications"},
 
             // Chemistry
-            {"Introduction to organic Chemistry", "Organic Chemistry", "Math 4", "IDE 10.1", "Oral Communications", "NSTP 1", "PE 1"},
+            {"Introduction to organic Chemistry", "Biology", "Math 4", "IDE 10.1", "Oral Communications", "NSTP 1", "PE 1"},
 
             // Biology
             {"Introduction to biology", "Microbiology", "Basic calculus", "Theology 1", "Written Communications", "NSTP 1", "PE 1"}
